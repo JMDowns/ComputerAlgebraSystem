@@ -19,25 +19,29 @@ Verifier - Verifies string given to make sure that it fits into the format CAS u
 
 FIELDS:
 Variable:
-	- var(char) - letter of variable (x, y, z)
-	- power(int32) - power of variable (first power, second power)
+	- VarPower(Dictionary<char, float>) - Stores variables and corresponding power
 Term:
-	- variableList(List<Variable>) - all variables in term (xy, xz)
-	- coefficient(int32) - coefficient of variable (4, 2, 1)
-	- operation(switch) - operation being performed on term (addition, subtraction, multiplication)
+	- Var(Variable) - the variable for the term
+	- Coefficient(Float) - coefficient for the term
+	- TermOperation(int) - number used for operation handling and term printing
+	- Power(int) - Power of the whole term
+	- HasBeenAdded(bool) - As of now only used for the Adder.Add method with polynomial inputs
 Polynomial:
-	- termList(List<Term>) - all terms in polynomial (+4x^2, -5y^3x)
-	- operation(switch) - operation being performed on polynomial (addition, subtraction, multiplication)
+	- Terms(List<Term>) - all terms in polynomial (+4x^2, -5y^3x)
+	- PolynomialOperation(int) - operation being performed on polynomial (addition, subtraction, multiplication)
+	- Power(int) - power of polynomial
+	
 Expression:
-	- polynomialList(List<polynomial>) - all polynomials in expression ( (4x + 2y^2 - 5), (8y + 2) (4x/(5y)), (7x) )
+	- Polynomials(List<polynomial>) - all polynomials in expression ( (4x + 2y^2 - 5), (8y + 2) (4x/(5y)), (7x) )
 	
 METHODS:
 Adder:
-	- Add(Term term1, Term term2) - Adds two terms together, returns Term term3
+	- Add(Term t1, Term t2) - Adds two terms together, returns Term t3
+	- Add(Polynomial p1, Polynomial p2) - Adds two polynomials together, returns polynomial p3
 Subtracter:
-	- Subtract(Term term1, Term term2) - Subtracts two terms together, returns Term term3
+	- Subtract(Term t1, Term t2) - Subtracts two terms together, returns Term term3
 Multiplier:
-	- Multiply(Term term1, Term term2) - Multiplies two terms togeter, returns Term term3
+	- Multiply(Term t1, Term t2) - Multiplies two terms togeter, returns Term term3
 	- Multiply(Polynomial p1, Polynomial p2) - Multiplies two polynomials together, returns Polynomial p3
 Divider:
 	- Divide(Term term1, Term term2) - Divides two terms, returns Term term3
