@@ -8,16 +8,16 @@ namespace ComputerAlgebraSystem.Operations
 {
     static class Multiplier
     {
-        static public Term Multiply(Term term1, Term term2)
+        static public Term Multiply(Term t1, Term t2)
         {
-            float multipliedCoefficient = term1.Coefficient * term2.Coefficient;
-            var newVariables = new Dictionary<char, float>(term1.Var.VarPower);
-            var termOperationSwitch = 1;
+            float multipliedCoefficient = t1.Coefficient * t2.Coefficient;
+            var newVariables = new Dictionary<char, float>(t1.Var.VarPower);
+            var termOperation = 1;
             var power = 1;
             
-            foreach(KeyValuePair<char, float> term2Vars in term2.Var.VarPower)
+            foreach(KeyValuePair<char, float> term2Vars in t2.Var.VarPower)
             {
-                if (term1.Var.VarPower.ContainsKey(term2Vars.Key))
+                if (t1.Var.VarPower.ContainsKey(term2Vars.Key))
                 {
                     newVariables[term2Vars.Key] += term2Vars.Value;
                 }
@@ -27,7 +27,7 @@ namespace ComputerAlgebraSystem.Operations
                 }
             }
 
-            return new Term(new Variable(newVariables), multipliedCoefficient, termOperationSwitch, power);
+            return new Term(new Variable(newVariables), multipliedCoefficient, termOperation, power);
         }
 
         static public Polynomial Multiply(Polynomial p1, Polynomial p2)

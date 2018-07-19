@@ -10,22 +10,22 @@ namespace ComputerAlgebraSystem
     {
         public Variable Var { get; private set; }
         public float Coefficient { get; private set; }
-        public int TermOperationSwitch { get; private set; }
+        public int TermOperation { get; private set; }
         public int Power { get; private set; }
-        public bool HasBeenAdded { get; set; }
+        public bool HasBeenOperated { get; set; }
 
-        public Term(Variable var, float coefficient, int termOperationSwitch, int power)
+        public Term(Variable var, float coefficient, int termOperation, int power, bool HasBeenOperated = false)
         {
             Var = var;
             Coefficient = coefficient;
-            TermOperationSwitch = termOperationSwitch;
+            TermOperation = termOperation;
             Power = power;
         }
 
         public void Print()
         {
             string operation = "";
-            switch (TermOperationSwitch)
+            switch (TermOperation)
             {
                 case 1:
                     operation = "+";

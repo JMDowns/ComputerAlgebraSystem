@@ -8,17 +8,17 @@ namespace ComputerAlgebraSystem
 {
     public class Expression
     {
-        public List<Polynomial> PolynomialList { get; private set; }
+        public List<Polynomial> Polynomials { get; private set; }
 
-        public Expression(List<Polynomial> polynomialList)
+        public Expression(List<Polynomial> polynomials)
         {
-            PolynomialList = polynomialList;
+            Polynomials = polynomials;
         }
 
         public void Print()
         {
-            Console.Write("(");
-            foreach (var polynomial in PolynomialList)
+            Console.WriteLine("(");
+            foreach (var polynomial in Polynomials)
                 polynomial.Print();
             Console.WriteLine(")");
         }

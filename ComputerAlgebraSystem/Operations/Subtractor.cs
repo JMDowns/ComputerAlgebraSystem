@@ -8,10 +8,10 @@ namespace ComputerAlgebraSystem.Operations
 {
     static class Subtractor
     {
-        static public Term Subtract(Term term1, Term term2)
+        static public Term Subtract(Term t1, Term t2)
         {
-            var subtractedCoefficient = term1.Coefficient - term2.Coefficient;
-            return new Term(term1.Var, subtractedCoefficient, 1, 1);
+            var subtractedCoefficient = t1.Coefficient - t2.Coefficient;
+            return new Term(t1.Var, subtractedCoefficient, 1, 1);
         }
     }
 }

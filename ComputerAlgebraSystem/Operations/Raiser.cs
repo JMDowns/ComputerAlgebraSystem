@@ -8,26 +8,26 @@ namespace ComputerAlgebraSystem.Operations
 {
     static class Raiser
     {
-        static public Term Raise(Term term, int power)
+        static public Term Raise(Term t, int power)
         {
-            var raisedCoefficient = (float)Math.Pow(term.Coefficient, power);
+            var raisedCoefficient = (float)Math.Pow(t.Coefficient, power);
             var newVariable = new Dictionary<char, float>();
-            var termOperationSwitch = 1;
+            var termOperation = 1;
 
-            foreach (KeyValuePair<char, float> varPower in term.Var.VarPower)
+            foreach (KeyValuePair<char, float> varPower in t.Var.VarPower)
             {
                 newVariable.Add(varPower.Key, varPower.Value * power);
             }
 
-            return new Term(new Variable(newVariable), raisedCoefficient, termOperationSwitch, 1);
+            return new Term(new Variable(newVariable), raisedCoefficient, termOperation, 1);
         }
 
-        static public Polynomial Raise(Polynomial polynomial, int power)
+        static public Polynomial Raise(Polynomial p, int power)
         {
-            var recursivePolynomial = polynomial;
+            var recursivePolynomial = p;
             for (int i = 0; i < power; i++)
             {
-                recursivePolynomial = Distributor.Distribute(recursivePolynomial, polynomial);
+                recursivePolynomial = Distributor.Distribute(recursivePolynomial, p);
             }
             return recursivePolynomial;
         }

@@ -1,9 +1,6 @@
 ﻿using ComputerAlgebraSystem.Operations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ComputerAlgebraSystem.Setup;
+using ComputerAlgebraSystem.DoingStuff;
 
 namespace ComputerAlgebraSystem
 {
@@ -18,17 +15,20 @@ namespace ComputerAlgebraSystem
     {
         static void Main(string[] args)
         {
+            Expression printedExpression;
             Overseer overseer = new Overseer();
             overseer.Setup();
             overseer.Expression.Print();
-            var mTerm = Multiplier.Multiply(overseer.Expression.PolynomialList[0].Terms[0], overseer.Expression.PolynomialList[0].Terms[1]);
-            var dTerm = Divider.Divide(overseer.Expression.PolynomialList[0].Terms[0], overseer.Expression.PolynomialList[0].Terms[1]);
-            var rPolynomial = Multiplier.Multiply(overseer.Expression.PolynomialList[0], overseer.Expression.PolynomialList[0]);
-            var aPolynomial = Adder.Add(overseer.Expression.PolynomialList[0], overseer.Expression.PolynomialList[0]);
-            mTerm.Print();
-            dTerm.Print();
-            rPolynomial.Print();
-            aPolynomial.Print();
+            //var mTerm = Multiplier.Multiply(overseer.Expression.Polynomials[0].Terms[0], overseer.Expression.Polynomials[0].Terms[1]);
+            //var dTerm = Divider.Divide(overseer.Expression.Polynomials[0].Terms[0], overseer.Expression.Polynomials[0].Terms[1]);
+            //var rPolynomial = Multiplier.Multiply(overseer.Expression.Polynomials[0], overseer.Expression.Polynomials[0]);
+            //var aPolynomial = Adder.Add(overseer.Expression.Polynomials[0], overseer.Expression.Polynomials[0]);
+            //mTerm.Print();
+            //dTerm.Print();
+            //rPolynomial.Print();
+            //aPolynomial.Print();
+            printedExpression = Operator.Operate(overseer.Expression);
+            printedExpression.Print();
         }
     }
 }

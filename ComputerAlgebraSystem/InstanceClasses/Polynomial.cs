@@ -9,20 +9,20 @@ namespace ComputerAlgebraSystem
     public class Polynomial
     {
         public List<Term> Terms { get; private set; }
-        public int PolynomialOperationSwitch { get; private set; }
+        public int PolynomialOperation { get; private set; }
         public int Power { get; private set; }
 
-        public Polynomial(List<Term> terms, int polynomialOperationSwitch, int power)
+        public Polynomial(List<Term> terms, int polynomialOperation, int power)
         {
             Terms = terms;
-            PolynomialOperationSwitch = polynomialOperationSwitch;
+            PolynomialOperation = polynomialOperation;
             Power = power;
         }
 
         public void Print()
         {
             string operation = "";
-            switch (PolynomialOperationSwitch)
+            switch (PolynomialOperation)
             {
                 case 1:
                     operation = "+";
