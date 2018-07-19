@@ -39,19 +39,16 @@ Adder:
 	- Add(Term t1, Term t2) - Adds two terms together, returns Term t3
 	- Add(Polynomial p1, Polynomial p2) - Adds two polynomials together, returns polynomial p3
 Subtracter:
-	- Subtract(Term t1, Term t2) - Subtracts two terms together, returns Term term3
+	- Subtract(Term t1, Term t2) - Subtracts two terms together, returns Term t3
 Multiplier:
-	- Multiply(Term t1, Term t2) - Multiplies two terms togeter, returns Term term3
+	- Multiply(Term t1, Term t2) - Multiplies two terms togeter, returns Term t3
 	- Multiply(Polynomial p1, Polynomial p2) - Multiplies two polynomials together, returns Polynomial p3
 Divider:
-	- Divide(Term term1, Term term2) - Divides two terms, returns Term term3
-	- Divide(Polynomial p1, Polynomial p2) - Divides two polynomials, returns Polynomial p3
+	- Divide(Term t1, Term t2) - Divides two terms, returns Term t3
 Raiser:
-	- Raise(Term term1) - Raises one term to a particular power (if coefficient can't be simplified it will be left to the raised to a power form)
-	- Raise(Polynomial p1) - Turns the polynomial into a multiplication problem if the power is whole - if not, leaves it be
+	- Raise(Term t, int power) - Raises one term to a particular power
+	- Raise(Polynomial p, int power) - Turns the polynomial into a multiplication problem for Distributor
 Distributor:
-	- Distribute(Polynomial p1, Term term1) - Distributes the term across the polynomial given
-	- Distribute(Term term1, Polynomial p1) - Distributes the term across the polynomial given
 	- Distribute(Polynomial p1, Polynomial p1) - Distributes the polynomial by using Distribute for each term in the polynomial
 Recognizer:
 	- Recognize(string expression) - Recognizes each term, polynomial, and expression in the *verified* expression given
