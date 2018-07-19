@@ -1,0 +1,55 @@
+Computer Algebra System
+
+GOAL: To design a mathematical system that can recognize terms, perform addition, subtraction,
+multiplication, division, exponentiation, grouping, and rooting functions.
+
+CLASSES:
+Variable - Stores var and power, represents a variable like x squared or y to the 4th
+Term - Stores variable, operation, and coefficient, represents a term like +4x squared or times 6y to the 4th
+Polynomial - Stores terms together in sequential order along with an operation for all terms [like times (4 + 6y)]
+Expression - Stores polynomials together in sequential order, greatest level and encompasses all of expression
+Adder - Adds like terms
+Subtracter - Subtracts like terms
+Multiplier - Multiplies terms/polynomials
+Divider - Divides terms/polynomials
+Raiser - Raises terms/polynomials to a particular power (all powers, so <1 too)
+Distributor - Distributes when multiplying, dividing, or raising to a power greater than 1(turns exponentiation into multiplication)
+Recognizer - Takes a string expression and groups it into an expression, polynomials, terms, and variables
+Verifier - Verifies string given to make sure that it fits into the format CAS uses
+
+FIELDS:
+Variable:
+	- var(char) - letter of variable (x, y, z)
+	- power(int32) - power of variable (first power, second power)
+Term:
+	- variableList(List<Variable>) - all variables in term (xy, xz)
+	- coefficient(int32) - coefficient of variable (4, 2, 1)
+	- operation(switch) - operation being performed on term (addition, subtraction, multiplication)
+Polynomial:
+	- termList(List<Term>) - all terms in polynomial (+4x^2, -5y^3x)
+	- operation(switch) - operation being performed on polynomial (addition, subtraction, multiplication)
+Expression:
+	- polynomialList(List<polynomial>) - all polynomials in expression ( (4x + 2y^2 - 5), (8y + 2) (4x/(5y)), (7x) )
+	
+METHODS:
+Adder:
+	- Add(Term term1, Term term2) - Adds two terms together, returns Term term3
+Subtracter:
+	- Subtract(Term term1, Term term2) - Subtracts two terms together, returns Term term3
+Multiplier:
+	- Multiply(Term term1, Term term2) - Multiplies two terms togeter, returns Term term3
+	- Multiply(Polynomial p1, Polynomial p2) - Multiplies two polynomials together, returns Polynomial p3
+Divider:
+	- Divide(Term term1, Term term2) - Divides two terms, returns Term term3
+	- Divide(Polynomial p1, Polynomial p2) - Divides two polynomials, returns Polynomial p3
+Raiser:
+	- Raise(Term term1) - Raises one term to a particular power (if coefficient can't be simplified it will be left to the raised to a power form)
+	- Raise(Polynomial p1) - Turns the polynomial into a multiplication problem if the power is whole - if not, leaves it be
+Distributor:
+	- Distribute(Polynomial p1, Term term1) - Distributes the term across the polynomial given
+	- Distribute(Term term1, Polynomial p1) - Distributes the term across the polynomial given
+	- Distribute(Polynomial p1, Polynomial p1) - Distributes the polynomial by using Distribute for each term in the polynomial
+Recognizer:
+	- Recognize(string expression) - Recognizes each term, polynomial, and expression in the *verified* expression given
+Verifier:
+	- Verify(string expression) - Verifies expression to make sure it doesn't use any unrecognizable characters or have incorrect formatting (Parentheses addition in case of one less?)
