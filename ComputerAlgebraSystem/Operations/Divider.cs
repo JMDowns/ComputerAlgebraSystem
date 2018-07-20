@@ -8,7 +8,7 @@ namespace ComputerAlgebraSystem.Operations
 {
     static class Divider
     {
-        static public Term Divide(Term t1, Term t2)
+        static public Term Divide(Term t2, Term t1)
         {
             float dividedCoefficient = t1.Coefficient / t2.Coefficient;
             var newVariables = new Dictionary<char, float>(t1.Var.VarPower);

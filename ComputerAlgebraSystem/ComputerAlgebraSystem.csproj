@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DoingStuff\PolynomialOperator.cs" />
     <Compile Include="Setup\Asker.cs" />
     <Compile Include="InstanceClasses\Expression.cs" />
     <Compile Include="InstanceClasses\Polynomial.cs" />

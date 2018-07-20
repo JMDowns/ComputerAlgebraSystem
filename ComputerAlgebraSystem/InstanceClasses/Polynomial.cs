@@ -19,8 +19,10 @@ namespace ComputerAlgebraSystem
             Power = power;
         }
 
-        public void Print()
+        public string ReturnString()
         {
+            var s = "";
+
             string operation = "";
             switch (PolynomialOperation)
             {
@@ -41,10 +43,12 @@ namespace ComputerAlgebraSystem
 
             }
 
-            Console.Write(operation + "(");
+            s = operation + "(";
             foreach(var term in Terms)
-                term.Print();
-            Console.Write(")");
+                s += term.ReturnString();
+            s += ")";
+
+            return s;
         }
     }
 }

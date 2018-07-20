@@ -15,12 +15,12 @@ namespace ComputerAlgebraSystem
             Polynomials = polynomials;
         }
 
-        public void Print()
+        public string ReturnString()
         {
-            Console.WriteLine("(");
+            var s = "";
             foreach (var polynomial in Polynomials)
-                polynomial.Print();
-            Console.WriteLine(")");
+                s += polynomial.ReturnString();
+            return s;
         }
     }
 }

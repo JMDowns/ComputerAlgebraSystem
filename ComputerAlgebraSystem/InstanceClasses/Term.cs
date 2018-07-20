@@ -22,8 +22,10 @@ namespace ComputerAlgebraSystem
             Power = power;
         }
 
-        public void Print()
+        public string ReturnString()
         {
+            var s = "";
+
             string operation = "";
             switch (TermOperation)
             {
@@ -43,10 +45,31 @@ namespace ComputerAlgebraSystem
                     break;
 
             }
+            s = operation + "(" + Coefficient + Var.ReturnString() + ")";
+            if (Power != 1)
+                s += "^" + Power + " ";
 
-            Console.Write(operation + "(" + Coefficient);
-            Var.Print();
-            Console.Write(")");
+            return s;
         }
-    }
+
+        public void NullOperation()
+        {
+            TermOperation = 0;
+        }
+
+        public void NullToAdd()
+        {
+            if (TermOperation == 0)
+                TermOperation = 1;
+        }
+
+        public void SubToNegAdd(Term t)
+        {
+            if(TermOperation == 2)
+            {
+                t.Coefficient = -1 * t.Coefficient;
+                t.TermOperation = 1;
+            }
+        }
+}
 }
