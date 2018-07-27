@@ -67,5 +67,15 @@ namespace ComputerAlgebraSystem
 
             return true;
         }
+
+        public int ReturnPower()
+        {
+            var power = 0;
+            foreach(int Value in VarPower.Values)
+            {
+                power += Value;
+            }
+            return power;
+        }
     }
 }

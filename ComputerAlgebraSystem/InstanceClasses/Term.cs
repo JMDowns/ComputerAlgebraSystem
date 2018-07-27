@@ -84,5 +84,10 @@ namespace ComputerAlgebraSystem
         {
             Coefficient = -1 * Coefficient;
         }
+
+        public int ReturnPower()
+        {
+            return Var.ReturnPower();
+        }
 }
 }

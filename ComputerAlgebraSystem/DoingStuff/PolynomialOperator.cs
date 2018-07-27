@@ -227,8 +227,8 @@ namespace ComputerAlgebraSystem.DoingStuff
 
             } while (endPolynomial.ReturnString() != tempPolynomial.ReturnString());
 
-            endPolynomial.Terms[0].NullOperation();
             Console.WriteLine("End of AS");
+            endPolynomial.Sort();
             return endPolynomial;
         }
     }

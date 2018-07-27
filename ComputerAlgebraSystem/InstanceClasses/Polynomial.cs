@@ -11,8 +11,9 @@ namespace ComputerAlgebraSystem
         public List<Term> Terms { get; private set; }
         public int PolynomialOperation { get; private set; }
         public int Power { get; private set; }
+        public bool HasBeenOperated { get; set; }
 
-        public Polynomial(List<Term> terms, int polynomialOperation, int power)
+        public Polynomial(List<Term> terms, int polynomialOperation, int power, bool HasBeenOperated = false)
         {
             Terms = terms;
             PolynomialOperation = polynomialOperation;
@@ -51,6 +52,11 @@ namespace ComputerAlgebraSystem
             return s;
         }
 
+        public void NullOperation()
+        {
+            PolynomialOperation = 0;
+        }
+
         public void NullToAdd()
         {
             if (PolynomialOperation == 0)
@@ -65,6 +71,23 @@ namespace ComputerAlgebraSystem
                     t.NegTerm();
                 PolynomialOperation = 1;
             }
+        }
+
+        public int GreatestPower()
+        {
+            var maxPower = 0;
+            foreach(Term t in Terms)
+            {
+                if (t.ReturnPower() > maxPower)
+                    maxPower = t.ReturnPower();
+            }
+            return maxPower;
+        }
+
+        public void Sort()
+        {
+            Terms = Terms.OrderBy(x => x.ReturnPower()).ToList();
+            Terms.Reverse();
         }
     }
 }

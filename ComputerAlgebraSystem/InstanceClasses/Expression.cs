@@ -15,6 +15,11 @@ namespace ComputerAlgebraSystem
             Polynomials = polynomials;
         }
 
+        public Expression()
+        {
+            Polynomials.Add(new Polynomial(new List<Term>() { new Term() }, 1, 1));
+        }
+
         public string ReturnString()
         {
             var s = "";
