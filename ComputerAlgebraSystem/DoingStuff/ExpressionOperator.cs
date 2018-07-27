@@ -18,8 +18,8 @@ namespace ComputerAlgebraSystem.DoingStuff
                 p.SubToNegAdd();
             }
             var peExpression = PE(e);
-            //var mdExpression = MD(peExpression);
-            var endExpression = AS(peExpression);
+            var mdExpression = MD(peExpression);
+            var endExpression = AS(mdExpression);
             Console.WriteLine("End");
             return endExpression;
         }
@@ -84,91 +84,95 @@ namespace ComputerAlgebraSystem.DoingStuff
             return endExpression;
         }
 
-        //static Expression MD(Expression e)
-        //{
-        //    var endExpression = e;
-        //    Expression tempExpression;
-        //    do
-        //    {
-        //        tempExpression = endExpression;
-        //        var newPolynomials = new List<Polynomial>();
+        static Expression MD(Expression e)
+        {
+            var endExpression = e;
+            Expression tempExpression;
+            do
+            {
+                tempExpression = endExpression;
+                var newPolynomials = new List<Polynomial>();
 
-        //        for (int i = 1; i < tempExpression.Polynomials.Count; i++)
-        //        {
-        //            if (tempExpression.Polynomials[i].PolynomialOperation == 4)
-        //            {
-        //                if (Verifier.VerifyDivide(tempExpression.Polynomials[i], tempExpression.Polynomials[i - 1]))
-        //                {
-        //                    int j = i;
-        //                    newPolynomials.Add(Divider.Divide(tempExpression.Polynomials[i], tempExpression.Polynomials[i - 1])); //TODO: Change tempExpression.Polynomials[0] to a more friendly name
-        //                    tempExpression.Polynomials[i].HasBeenOperated = true;
-        //                    tempExpression.Polynomials[i - 1].HasBeenOperated = true;
-        //                    while (tempExpression.Polynomials[j + 1].PolynomialOperation == 3 || tempExpression.Polynomials[j + 1].PolynomialOperation == 4)
-        //                    {
-        //                        if (tempExpression.Polynomials[j + 1].PolynomialOperation == 3)
-        //                        {
-        //                            newPolynomials[0] = Multiplier.Multiply(tempExpression.Polynomials[j + 1], newPolynomials[0]);
-        //                            tempExpression.Polynomials[j + 1].HasBeenOperated = true;
-        //                        }
+                for (int i = 1; i < tempExpression.Polynomials.Count; i++)
+                {
+                    //if (tempExpression.Polynomials[i].PolynomialOperation == 4)
+                    //{
+                    //    if (Verifier.VerifyDivide(tempExpression.Polynomials[i], tempExpression.Polynomials[i - 1]))
+                    //    {
+                    //        int j = i;
+                    //        newPolynomials.Add(Divider.Divide(tempExpression.Polynomials[i], tempExpression.Polynomials[i - 1])); //TODO: Change tempExpression.Polynomials[0] to a more friendly name
+                    //        tempExpression.Polynomials[i].HasBeenOperated = true;
+                    //        tempExpression.Polynomials[i - 1].HasBeenOperated = true;
+                    //        while (tempExpression.Polynomials[j + 1].PolynomialOperation == 3 || tempExpression.Polynomials[j + 1].PolynomialOperation == 4)
+                    //        {
+                    //            if (tempExpression.Polynomials[j + 1].PolynomialOperation == 3)
+                    //            {
+                    //                newPolynomials[0] = Multiplier.Multiply(tempExpression.Polynomials[j + 1], newPolynomials[0]);
+                    //                tempExpression.Polynomials[j + 1].HasBeenOperated = true;
+                    //            }
 
-        //                        if (tempExpression.Polynomials[j + 1].PolynomialOperation == 4)
-        //                        {
-        //                            newPolynomials[0] = Divider.Divide(tempExpression.Polynomials[j + 1], newPolynomials[0]);
-        //                            tempExpression.Polynomials[j + 1].HasBeenOperated = true;
-        //                        }
+                    //            if (tempExpression.Polynomials[j + 1].PolynomialOperation == 4)
+                    //            {
+                    //                newPolynomials[0] = Divider.Divide(tempExpression.Polynomials[j + 1], newPolynomials[0]);
+                    //                tempExpression.Polynomials[j + 1].HasBeenOperated = true;
+                    //            }
 
-        //                        j++;
-        //                    }
+                    //            j++;
+                    //        }
 
-        //                    break;
-        //                }
-        //            }
+                    //        break;
+                    //    }
+                    //}
 
-        //            if (tempExpression.Polynomials[i].PolynomialOperation == 3)
-        //            {
-        //                if (Verifier.VerifyMultiply(tempExpression.Polynomials[i], tempExpression.Polynomials[i - 1]))
-        //                {
-        //                    int j = i;
-        //                    newPolynomials.Add(Multiplier.Multiply(tempExpression.Polynomials[i], tempExpression.Polynomials[i - 1]));
-        //                    tempExpression.Polynomials[i].HasBeenOperated = true;
-        //                    tempExpression.Polynomials[i - 1].HasBeenOperated = true;
-        //                    while (tempExpression.Polynomials[j + 1].PolynomialOperation == 3 || tempExpression.Polynomials[j + 1].PolynomialOperation == 4)
-        //                    {
-        //                        if (tempExpression.Polynomials[j + 1].PolynomialOperation == 3)
-        //                        {
-        //                            newPolynomials[0] = Multiplier.Multiply(tempExpression.Polynomials[j + 1], newPolynomials[0]);
-        //                            tempExpression.Polynomials[j + 1].HasBeenOperated = true;
-        //                        }
+                    if (tempExpression.Polynomials[i].PolynomialOperation == 3)
+                    {
+                        if (Verifier.VerifyMultiply(tempExpression.Polynomials[i], tempExpression.Polynomials[i - 1]))
+                        {
+                            int j = i;
+                            newPolynomials.Add(Multiplier.Multiply(tempExpression.Polynomials[i], tempExpression.Polynomials[i - 1]));
+                            tempExpression.Polynomials[i].HasBeenOperated = true;
+                            tempExpression.Polynomials[i - 1].HasBeenOperated = true;
+                            try
+                            {
+                                while (tempExpression.Polynomials[j + 1].PolynomialOperation == 3 || tempExpression.Polynomials[j + 1].PolynomialOperation == 4)
+                                {
+                                    if (tempExpression.Polynomials[j + 1].PolynomialOperation == 3)
+                                    {
+                                        newPolynomials[0] = Multiplier.Multiply(tempExpression.Polynomials[j + 1], newPolynomials[0]);
+                                        tempExpression.Polynomials[j + 1].HasBeenOperated = true;
+                                    }
 
-        //                        if (tempExpression.Polynomials[j + 1].PolynomialOperation == 4)
-        //                        {
-        //                            newPolynomials[0] = Divider.Divide(tempExpression.Polynomials[j + 1], newPolynomials[0]);
-        //                            tempExpression.Polynomials[j + 1].HasBeenOperated = true;
-        //                        }
+                                    //if (tempExpression.Polynomials[j + 1].PolynomialOperation == 4)
+                                    //{
+                                    //    newPolynomials[0] = Divider.Divide(tempExpression.Polynomials[j + 1], newPolynomials[0]);
+                                    //    tempExpression.Polynomials[j + 1].HasBeenOperated = true;
+                                    //}
 
-        //                        j++;
-        //                    }
+                                    j++;
+                                }
+                            }
+                            catch ( ArgumentOutOfRangeException) { }
 
-        //                    break;
-        //                }
-        //            }
+                            break;
+                        }
+                    }
 
-        //        }
+                }
 
-        //        foreach (Polynomial p in tempExpression.Polynomials)
-        //        {
-        //            if (!p.HasBeenOperated)
-        //                newPolynomials.Add(p);
-        //        }
+                foreach (Polynomial p in tempExpression.Polynomials)
+                {
+                    if (!p.HasBeenOperated)
+                        newPolynomials.Add(p);
+                }
 
-        //        endExpression = new Expression(newPolynomials);
-        //        Console.WriteLine(endExpression.ReturnString());
-        //        //var dummytext = Console.ReadLine();
-        //    } while (endExpression.ReturnString() != tempExpression.ReturnString());
+                endExpression = new Expression(newPolynomials);
+                Console.WriteLine(endExpression.ReturnString());
+                //var dummytext = Console.ReadLine();
+            } while (endExpression.ReturnString() != tempExpression.ReturnString());
 
-        //    Console.WriteLine("End of MD");
-        //    return endExpression;
-        //}
+            Console.WriteLine("End of MD");
+            return endExpression;
+        }
 
         static Expression AS(Expression e)
         {
@@ -194,11 +198,6 @@ namespace ComputerAlgebraSystem.DoingStuff
                     }
                 }
 
-                //foreach (Polynomial p in tempExpression.Polynomials)
-                //{
-                //    if (!p.HasBeenOperated)
-                //        newPolynomials.Add(p);
-                //}
                 if (tempExpression.Polynomials.Count > 1)
                     endExpression = new Expression(new List<Polynomial>() { new Polynomial(newTerms, 1, 1) });
 

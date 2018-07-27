@@ -49,7 +49,7 @@ namespace ComputerAlgebraSystem.Setup
             alistOfTerms.Add(aPlusSevenXSquaredZCubed);
 
             Polynomial original = new Polynomial(listOfTerms, 0, 1);
-            Polynomial copy = new Polynomial(alistOfTerms, 1, 1);
+            Polynomial copy = new Polynomial(alistOfTerms, 3, 1);
             var listOfPolynomials = new List<Polynomial>() { original, copy };
             Expression esevenYSquaredDividedByTenXSquaredMultipliedByTwentyXSquared = new Expression(listOfPolynomials);
             return esevenYSquaredDividedByTenXSquaredMultipliedByTwentyXSquared;

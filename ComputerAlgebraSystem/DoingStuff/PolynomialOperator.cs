@@ -99,22 +99,26 @@ namespace ComputerAlgebraSystem.DoingStuff
                             newTerms.Add(Divider.Divide(tempPolynomial.Terms[i], tempPolynomial.Terms[i - 1])); //TODO: Change tempPolynomial.Terms[0] to a more friendly name
                             tempPolynomial.Terms[i].HasBeenOperated = true;
                             tempPolynomial.Terms[i - 1].HasBeenOperated = true;
-                            while (tempPolynomial.Terms[j + 1].TermOperation == 3 || tempPolynomial.Terms[j + 1].TermOperation == 4)
+                            try
                             {
-                                if (tempPolynomial.Terms[j + 1].TermOperation == 3)
+                                while (tempPolynomial.Terms[j + 1].TermOperation == 3 || tempPolynomial.Terms[j + 1].TermOperation == 4)
                                 {
-                                    newTerms[0] = Multiplier.Multiply(tempPolynomial.Terms[j + 1], newTerms[0]);
-                                    tempPolynomial.Terms[j + 1].HasBeenOperated = true;
-                                }
+                                    if (tempPolynomial.Terms[j + 1].TermOperation == 3)
+                                    {
+                                        newTerms[0] = Multiplier.Multiply(tempPolynomial.Terms[j + 1], newTerms[0]);
+                                        tempPolynomial.Terms[j + 1].HasBeenOperated = true;
+                                    }
 
-                                if (tempPolynomial.Terms[j + 1].TermOperation == 4)
-                                {
-                                    newTerms[0] = Divider.Divide(tempPolynomial.Terms[j + 1], newTerms[0]);
-                                    tempPolynomial.Terms[j + 1].HasBeenOperated = true;
-                                }
+                                    if (tempPolynomial.Terms[j + 1].TermOperation == 4)
+                                    {
+                                        newTerms[0] = Divider.Divide(tempPolynomial.Terms[j + 1], newTerms[0]);
+                                        tempPolynomial.Terms[j + 1].HasBeenOperated = true;
+                                    }
 
-                                j++;
+                                    j++;
+                                }
                             }
+                            catch (ArgumentOutOfRangeException) { }
 
                             break;
                         }
@@ -128,22 +132,26 @@ namespace ComputerAlgebraSystem.DoingStuff
                             newTerms.Add(Multiplier.Multiply(tempPolynomial.Terms[i], tempPolynomial.Terms[i - 1]));
                             tempPolynomial.Terms[i].HasBeenOperated = true;
                             tempPolynomial.Terms[i - 1].HasBeenOperated = true;
-                            while (tempPolynomial.Terms[j + 1].TermOperation == 3 || tempPolynomial.Terms[j + 1].TermOperation == 4)
+                            try
                             {
-                                if (tempPolynomial.Terms[j + 1].TermOperation == 3)
+                                while (tempPolynomial.Terms[j + 1].TermOperation == 3 || tempPolynomial.Terms[j + 1].TermOperation == 4)
                                 {
-                                    newTerms[0] = Multiplier.Multiply(tempPolynomial.Terms[j + 1], newTerms[0]);
-                                    tempPolynomial.Terms[j + 1].HasBeenOperated = true;
-                                }
+                                    if (tempPolynomial.Terms[j + 1].TermOperation == 3)
+                                    {
+                                        newTerms[0] = Multiplier.Multiply(tempPolynomial.Terms[j + 1], newTerms[0]);
+                                        tempPolynomial.Terms[j + 1].HasBeenOperated = true;
+                                    }
 
-                                if (tempPolynomial.Terms[j + 1].TermOperation == 4)
-                                {
-                                    newTerms[0] = Divider.Divide(tempPolynomial.Terms[j + 1], newTerms[0]);
-                                    tempPolynomial.Terms[j + 1].HasBeenOperated = true;
-                                }
+                                    if (tempPolynomial.Terms[j + 1].TermOperation == 4)
+                                    {
+                                        newTerms[0] = Divider.Divide(tempPolynomial.Terms[j + 1], newTerms[0]);
+                                        tempPolynomial.Terms[j + 1].HasBeenOperated = true;
+                                    }
 
-                                j++;
+                                    j++;
+                                }
                             }
+                            catch (ArgumentOutOfRangeException) { }
 
                             break;
                         }
