@@ -10,14 +10,18 @@ namespace ComputerAlgebraSystem.DoingStuff
 {
     class Operator
     {
-        public Expression Operate(Expression expression)
+        public Expression Analyze_And_Simplify(Expression expression) // Change to better name (ie Analyze_And_Simplify)
         {
-            PolynomialOperator PO = new PolynomialOperator();
+            var PO = new PolynomialOperator();
+            var EO = new ExpressionOperator();
             var newPolynomials = new List<Polynomial>();
+
             foreach (Polynomial p in expression.Polynomials)
             {
-                newPolynomials.Add(PO.PolynomialOperate(p));
+                newPolynomials.Add(PO.Automatic_Operation_On_Polynomials(p));
             }
+
+            EO.Automatic_Operation_On_Polynomial_List(newPolynomials);
 
             return new Expression(newPolynomials);
         }

@@ -11,6 +11,7 @@ namespace ComputerAlgebraSystem
     //2 = Subtract
     //3 = Multiply
     //4 = Divide
+    //TODO: Change TermOperation to an enum
 
     class Program
     {
@@ -29,7 +30,7 @@ namespace ComputerAlgebraSystem
             //dTerm.Print();
             //rPolynomial.Print();
             //aPolynomial.Print();
-            printedExpression = op.Operate(ov.Expression);
+            printedExpression = op.Analyze_And_Simplify(ov.Expression);
             Console.WriteLine(printedExpression.ReturnString());
         }
     }

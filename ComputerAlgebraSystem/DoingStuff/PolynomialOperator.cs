@@ -7,12 +7,12 @@ namespace ComputerAlgebraSystem.DoingStuff
 {
     class PolynomialOperator
     {
-        public Polynomial PolynomialOperate(Polynomial polynomial)
+        public Polynomial Automatic_Operation_On_Polynomials(Polynomial polynomial)
         {
             foreach (Term term in polynomial.Terms)
             {
                 term.NullToAdd();
-                term.SubToNegAdd(term);
+                term.SubToNegAdd();
             }
             var pePolynomial = PE(polynomial);
             var mdPolynomial = MD(pePolynomial);
@@ -27,8 +27,8 @@ namespace ComputerAlgebraSystem.DoingStuff
             Polynomial tempPolynomial;
             do
             {
-                var editedTerms = new Dictionary<int, Term>();
                 tempPolynomial = endPolynomial;
+                var editedTerms = new Dictionary<int, Term>();
                 var oldTerms = new List<Term>();
                 var reconstructedTermList = new List<Term>();
 
@@ -38,6 +38,12 @@ namespace ComputerAlgebraSystem.DoingStuff
                     if (t.Power > 1)
                     {
                         editedTerms.Add(i, Raiser.Raise(t, t.Power));
+                        t.HasBeenOperated = true;
+                        break;
+                    }
+                    if (t.Power == 0)
+                    {
+                        editedTerms.Add(i, new Term());
                         t.HasBeenOperated = true;
                         break;
                     }
@@ -90,7 +96,7 @@ namespace ComputerAlgebraSystem.DoingStuff
                         if (Verifier.VerifyDivide(tempPolynomial.Terms[i], tempPolynomial.Terms[i - 1]))
                         {
                             int j = i;
-                            newTerms.Add(Divider.Divide(tempPolynomial.Terms[i], tempPolynomial.Terms[i - 1]));
+                            newTerms.Add(Divider.Divide(tempPolynomial.Terms[i], tempPolynomial.Terms[i - 1])); //TODO: Change tempPolynomial.Terms[0] to a more friendly name
                             tempPolynomial.Terms[i].HasBeenOperated = true;
                             tempPolynomial.Terms[i - 1].HasBeenOperated = true;
                             while (tempPolynomial.Terms[j + 1].TermOperation == 3 || tempPolynomial.Terms[j + 1].TermOperation == 4)
@@ -167,30 +173,11 @@ namespace ComputerAlgebraSystem.DoingStuff
             do
             {
                 tempPolynomial = endPolynomial;
-                /*foreach loop is added because when a term has no like terms, it skips over the foreach 
-                 *loop at the end of the for loop in the adding (TermOperation==1) part. In doing so, addedTerm's
-                 *HasBeenOperated never resets to false (Adder.Add returns a Term with the HBO set to false).
-                 *When HBO is set to True, the next time the loop iterates it won't add the term into the new polynomial, and thus
-                 *will make the sole term disappear.
-                 **/
-                foreach (Term term in tempPolynomial.Terms)
-                    term.HasBeenOperated = false;
 
                 var newTerms = new List<Term>();
 
                 for (int i = tempPolynomial.Terms.Count - 1; i > 0; i--)
                 {
-                    if (tempPolynomial.Terms[i].TermOperation == 2)
-                    {
-                        newTerms.Add(new Term(
-                            tempPolynomial.Terms[i].Var,
-                            -1 * tempPolynomial.Terms[i].Coefficient,
-                            1,
-                            tempPolynomial.Terms[i].Power));
-                        tempPolynomial.Terms[i].HasBeenOperated = true;
-                        break;
-                    }
-
                     if (tempPolynomial.Terms[i].TermOperation == 1)
                     {
                         Term t = tempPolynomial.Terms[i];
@@ -207,24 +194,26 @@ namespace ComputerAlgebraSystem.DoingStuff
                                         {
                                             likeTerms.Add(t);
                                             t.HasBeenOperated = true;
+                                            te.HasBeenOperated = true;
                                         }
                                     }
 
                                 }
 
                                 Term addedTerm = te;
-                                te.HasBeenOperated = true;
 
                                 foreach (Term term in likeTerms)
                                 {
                                     addedTerm = Adder.Add(addedTerm, term);
                                 }
 
-                                newTerms.Add(addedTerm);
-                                break;
+                                if (likeTerms.Count > 0)
+                                {
+                                    newTerms.Add(addedTerm);
+                                    break;
+                                }
                             }
                         }
-                        break;
                     }
                 }
 

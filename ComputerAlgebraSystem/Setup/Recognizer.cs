@@ -16,8 +16,8 @@ namespace ComputerAlgebraSystem.Setup
             var listOfTerms = new List<Term>();
             Term dividedByTenXSquared = new Term(new Variable(new List<char>() { 'x' }, new List<float>() { 2 }), 10, 4, 1);
             Term multipliedByTwentyXSquared = new Term(new Variable(new List<char>() { 'x' }, new List<float>() { 2 }), 20, 3, 1);
-            Term sevenYSquared = new Term(new Variable(new List<char>() { 'y' }, new List<float>() { 2 }), 7, 0, 1);
-            Term MinusSevenYSquared = new Term(new Variable(new List<char>() { 'y' }, new List<float>() { 2 }), 7, 2, 1);
+            Term sevenYSquared = new Term(new Variable(new List<char>() { 'y' }, new List<float>() { 2 }), 7, 0, 2);
+            Term MinusSevenYSquared = new Term(new Variable(new List<char>() { 'y' }, new List<float>() { 2 }), 7, 2, 0);
             Term MinusEightYSquared = new Term(new Variable(new List<char>() { 'y' }, new List<float>() { 2 }), 8, 2, 1);
             Term PlusSevenXSquared = new Term(new Variable(new List<char>() { 'x' }, new List<float>() { 2 }), 7, 1, 1);
             Term TimesTwentyZCubed = new Term(new Variable(new List<char>() { 'z' }, new List<float>() { 3 }), 20, 3, 1);
@@ -50,7 +50,7 @@ namespace ComputerAlgebraSystem.Setup
 
             Polynomial original = new Polynomial(listOfTerms, 0, 1);
             Polynomial copy = new Polynomial(alistOfTerms, 1, 1);
-            var listOfPolynomials = new List<Polynomial>() { original };
+            var listOfPolynomials = new List<Polynomial>() { original, copy };
             Expression esevenYSquaredDividedByTenXSquaredMultipliedByTwentyXSquared = new Expression(listOfPolynomials);
             return esevenYSquaredDividedByTenXSquaredMultipliedByTwentyXSquared;
         }

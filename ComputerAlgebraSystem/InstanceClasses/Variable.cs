@@ -26,6 +26,11 @@ namespace ComputerAlgebraSystem
             VarPower = varPower;
         }
 
+        public Variable()
+        {
+            VarPower = new Dictionary<char, float>() { { 'x', 0 } };
+        }
+
         public string ReturnString()
         {
             var s = "";

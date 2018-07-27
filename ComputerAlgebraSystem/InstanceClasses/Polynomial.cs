@@ -50,5 +50,21 @@ namespace ComputerAlgebraSystem
 
             return s;
         }
+
+        public void NullToAdd()
+        {
+            if (PolynomialOperation == 0)
+                PolynomialOperation = 1;
+        }
+
+        public void SubToNegAdd()
+        {
+            if (PolynomialOperation == 2)
+            {
+                foreach (Term t in Terms)
+                    t.NegTerm();
+                PolynomialOperation = 1;
+            }
+        }
     }
 }

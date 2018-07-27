@@ -22,6 +22,14 @@ namespace ComputerAlgebraSystem
             Power = power;
         }
 
+        public Term()
+        {
+            Var = new Variable();
+            Coefficient = 1;
+            TermOperation = 1;
+            Power = 1;
+        }
+
         public string ReturnString()
         {
             var s = "";
@@ -63,13 +71,18 @@ namespace ComputerAlgebraSystem
                 TermOperation = 1;
         }
 
-        public void SubToNegAdd(Term t)
+        public void SubToNegAdd()
         {
             if(TermOperation == 2)
             {
-                t.Coefficient = -1 * t.Coefficient;
-                t.TermOperation = 1;
+                NegTerm();
+                TermOperation = 1;
             }
+        }
+
+        public void NegTerm()
+        {
+            Coefficient = -1 * Coefficient;
         }
 }
 }
