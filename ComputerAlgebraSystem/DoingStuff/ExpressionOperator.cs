@@ -31,13 +31,14 @@ namespace ComputerAlgebraSystem.DoingStuff
             do
             {
                 tempExpression = endExpression;
+                var Polynomials = tempExpression.Polynomials;
                 var editedPolynomials = new Dictionary<int, Polynomial>();
                 var oldPolynomials = new List<Polynomial>();
                 var reconstructedPolynomialList = new List<Polynomial>();
 
-                for (int i = 0; i < tempExpression.Polynomials.Count; i++)
+                for (int i = 0; i < Polynomials.Count; i++)
                 {
-                    Polynomial p = tempExpression.Polynomials[i];
+                    Polynomial p = Polynomials[i];
                     if (p.Power > 1)
                     {
                         editedPolynomials.Add(i, Raiser.Raise(p, p.Power));
@@ -53,11 +54,16 @@ namespace ComputerAlgebraSystem.DoingStuff
                     }
                 }
 
-                foreach (Polynomial p in tempExpression.Polynomials)
+                foreach (Polynomial p in Polynomials)
                 {
                     if (!p.HasBeenOperated)
                         oldPolynomials.Add(p);
                 }
+
+
+                // In case of a lone polynomial, which will cause the for loop in the future to skip over
+                if (oldPolynomials.Count == 0)
+                    reconstructedPolynomialList.Add(editedPolynomials[0]);
 
                 /* This bit is different from the other methods so raising a term doesn't mess with the order of the terms.
                  * */
@@ -91,30 +97,31 @@ namespace ComputerAlgebraSystem.DoingStuff
             do
             {
                 tempExpression = endExpression;
+                var Polynomials = tempExpression.Polynomials;
                 var newPolynomials = new List<Polynomial>();
 
-                for (int i = 1; i < tempExpression.Polynomials.Count; i++)
+                for (int i = 1; i < Polynomials.Count; i++)
                 {
-                    //if (tempExpression.Polynomials[i].PolynomialOperation == 4)
+                    //if (Polynomials[i].PolynomialOperation == 4)
                     //{
-                    //    if (Verifier.VerifyDivide(tempExpression.Polynomials[i], tempExpression.Polynomials[i - 1]))
+                    //    if (Verifier.VerifyDivide(Polynomials[i], Polynomials[i - 1]))
                     //    {
                     //        int j = i;
-                    //        newPolynomials.Add(Divider.Divide(tempExpression.Polynomials[i], tempExpression.Polynomials[i - 1])); //TODO: Change tempExpression.Polynomials[0] to a more friendly name
-                    //        tempExpression.Polynomials[i].HasBeenOperated = true;
-                    //        tempExpression.Polynomials[i - 1].HasBeenOperated = true;
-                    //        while (tempExpression.Polynomials[j + 1].PolynomialOperation == 3 || tempExpression.Polynomials[j + 1].PolynomialOperation == 4)
+                    //        newPolynomials.Add(Divider.Divide(Polynomials[i], Polynomials[i - 1]));
+                    //        Polynomials[i].HasBeenOperated = true;
+                    //        Polynomials[i - 1].HasBeenOperated = true;
+                    //        while (Polynomials[j + 1].PolynomialOperation == 3 || Polynomials[j + 1].PolynomialOperation == 4)
                     //        {
-                    //            if (tempExpression.Polynomials[j + 1].PolynomialOperation == 3)
+                    //            if (Polynomials[j + 1].PolynomialOperation == 3)
                     //            {
-                    //                newPolynomials[0] = Multiplier.Multiply(tempExpression.Polynomials[j + 1], newPolynomials[0]);
-                    //                tempExpression.Polynomials[j + 1].HasBeenOperated = true;
+                    //                newPolynomials[0] = Multiplier.Multiply(Polynomials[j + 1], newPolynomials[0]);
+                    //                Polynomials[j + 1].HasBeenOperated = true;
                     //            }
 
-                    //            if (tempExpression.Polynomials[j + 1].PolynomialOperation == 4)
+                    //            if (Polynomials[j + 1].PolynomialOperation == 4)
                     //            {
-                    //                newPolynomials[0] = Divider.Divide(tempExpression.Polynomials[j + 1], newPolynomials[0]);
-                    //                tempExpression.Polynomials[j + 1].HasBeenOperated = true;
+                    //                newPolynomials[0] = Divider.Divide(Polynomials[j + 1], newPolynomials[0]);
+                    //                Polynomials[j + 1].HasBeenOperated = true;
                     //            }
 
                     //            j++;
@@ -124,28 +131,28 @@ namespace ComputerAlgebraSystem.DoingStuff
                     //    }
                     //}
 
-                    if (tempExpression.Polynomials[i].PolynomialOperation == 3)
+                    if (Polynomials[i].PolynomialOperation == 3)
                     {
-                        if (Verifier.VerifyMultiply(tempExpression.Polynomials[i], tempExpression.Polynomials[i - 1]))
+                        if (Verifier.VerifyMultiply(Polynomials[i], Polynomials[i - 1]))
                         {
                             int j = i;
-                            newPolynomials.Add(Multiplier.Multiply(tempExpression.Polynomials[i], tempExpression.Polynomials[i - 1]));
-                            tempExpression.Polynomials[i].HasBeenOperated = true;
-                            tempExpression.Polynomials[i - 1].HasBeenOperated = true;
+                            newPolynomials.Add(Multiplier.Multiply(Polynomials[i], Polynomials[i - 1]));
+                            Polynomials[i].HasBeenOperated = true;
+                            Polynomials[i - 1].HasBeenOperated = true;
                             try
                             {
-                                while (tempExpression.Polynomials[j + 1].PolynomialOperation == 3 || tempExpression.Polynomials[j + 1].PolynomialOperation == 4)
+                                while (Polynomials[j + 1].PolynomialOperation == 3 || Polynomials[j + 1].PolynomialOperation == 4)
                                 {
-                                    if (tempExpression.Polynomials[j + 1].PolynomialOperation == 3)
+                                    if (Polynomials[j + 1].PolynomialOperation == 3)
                                     {
-                                        newPolynomials[0] = Multiplier.Multiply(tempExpression.Polynomials[j + 1], newPolynomials[0]);
-                                        tempExpression.Polynomials[j + 1].HasBeenOperated = true;
+                                        newPolynomials[0] = Multiplier.Multiply(Polynomials[j + 1], newPolynomials[0]);
+                                        Polynomials[j + 1].HasBeenOperated = true;
                                     }
 
-                                    //if (tempExpression.Polynomials[j + 1].PolynomialOperation == 4)
+                                    //if (Polynomials[j + 1].PolynomialOperation == 4)
                                     //{
-                                    //    newPolynomials[0] = Divider.Divide(tempExpression.Polynomials[j + 1], newPolynomials[0]);
-                                    //    tempExpression.Polynomials[j + 1].HasBeenOperated = true;
+                                    //    newPolynomials[0] = Divider.Divide(Polynomials[j + 1], newPolynomials[0]);
+                                    //    Polynomials[j + 1].HasBeenOperated = true;
                                     //}
 
                                     j++;
@@ -159,7 +166,7 @@ namespace ComputerAlgebraSystem.DoingStuff
 
                 }
 
-                foreach (Polynomial p in tempExpression.Polynomials)
+                foreach (Polynomial p in Polynomials)
                 {
                     if (!p.HasBeenOperated)
                         newPolynomials.Add(p);
@@ -181,15 +188,16 @@ namespace ComputerAlgebraSystem.DoingStuff
             do
             {
                 tempExpression = endExpression;
+                var Polynomials = tempExpression.Polynomials;
 
                 var newTerms = new List<Term>();
 
-                for (int i = tempExpression.Polynomials.Count - 1; i > 0; i--)
+                for (int i = Polynomials.Count - 1; i > 0; i--)
                 {
-                    if (tempExpression.Polynomials[i].PolynomialOperation == 1)
+                    if (Polynomials[i].PolynomialOperation == 1)
                     {
-                        Polynomial p = tempExpression.Polynomials[i];
-                        Polynomial po = tempExpression.Polynomials[i - 1];
+                        Polynomial p = Polynomials[i];
+                        Polynomial po = Polynomials[i - 1];
 
                         foreach (Term t in p.Terms)
                             newTerms.Add(t);
@@ -198,7 +206,7 @@ namespace ComputerAlgebraSystem.DoingStuff
                     }
                 }
 
-                if (tempExpression.Polynomials.Count > 1)
+                if (Polynomials.Count > 1)
                     endExpression = new Expression(new List<Polynomial>() { new Polynomial(newTerms, 1, 1) });
 
                 Console.WriteLine(endExpression.ReturnString());

@@ -8,7 +8,7 @@ namespace ComputerAlgebraSystem.Setup
 {
     static class Asker
     {
-        static public string Ask()
+        static public string Ask() //TODO: Actually make this method
         {
             string input = "7x^2-10x^2";
             return input;

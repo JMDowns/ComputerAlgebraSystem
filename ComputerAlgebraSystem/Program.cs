@@ -11,7 +11,6 @@ namespace ComputerAlgebraSystem
     //2 = Subtract
     //3 = Multiply
     //4 = Divide
-    //TODO: Change TermOperation to an enum
 
     class Program
     {
@@ -21,15 +20,7 @@ namespace ComputerAlgebraSystem
             Overseer ov = new Overseer();
             Operator op = new Operator();
             ov.Setup();
-            Console.WriteLine(ov.Expression.ReturnString()); 
-            //var mTerm = Multiplier.Multiply(overseer.Expression.Polynomials[0].Terms[0], overseer.Expression.Polynomials[0].Terms[1]);
-            //var dTerm = Divider.Divide(overseer.Expression.Polynomials[0].Terms[0], overseer.Expression.Polynomials[0].Terms[1]);
-            //var rPolynomial = Multiplier.Multiply(overseer.Expression.Polynomials[0], overseer.Expression.Polynomials[0]);
-            //var aPolynomial = Adder.Add(overseer.Expression.Polynomials[0], overseer.Expression.Polynomials[0]);
-            //mTerm.Print();
-            //dTerm.Print();
-            //rPolynomial.Print();
-            //aPolynomial.Print();
+            Console.WriteLine(ov.Expression.ReturnString());
             printedExpression = op.Analyze_And_Simplify(ov.Expression);
             Console.WriteLine(printedExpression.ReturnString());
         }

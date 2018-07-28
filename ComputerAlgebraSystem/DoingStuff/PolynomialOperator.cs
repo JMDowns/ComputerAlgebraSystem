@@ -28,13 +28,14 @@ namespace ComputerAlgebraSystem.DoingStuff
             do
             {
                 tempPolynomial = endPolynomial;
+                var Terms = tempPolynomial.Terms;
                 var editedTerms = new Dictionary<int, Term>();
                 var oldTerms = new List<Term>();
                 var reconstructedTermList = new List<Term>();
 
-                for(int i = 0; i < tempPolynomial.Terms.Count; i++)
+                for(int i = 0; i < Terms.Count; i++)
                 {
-                    Term t = tempPolynomial.Terms[i];
+                    Term t = Terms[i];
                     if (t.Power > 1)
                     {
                         editedTerms.Add(i, Raiser.Raise(t, t.Power));
@@ -49,7 +50,7 @@ namespace ComputerAlgebraSystem.DoingStuff
                     }
                 }
 
-                foreach (Term t in tempPolynomial.Terms)
+                foreach (Term t in Terms)
                 {
                     if (!t.HasBeenOperated)
                         oldTerms.Add(t);
@@ -88,31 +89,33 @@ namespace ComputerAlgebraSystem.DoingStuff
             {
                 tempPolynomial = endPolynomial;
                 var newTerms = new List<Term>();
+                var Terms = tempPolynomial.Terms;
 
-                for (int i = 1; i < tempPolynomial.Terms.Count; i++)
+                for (int i = 1; i < Terms.Count; i++)
                 {
-                    if (tempPolynomial.Terms[i].TermOperation == 4)
+                    if (Terms[i].TermOperation == 4)
                     {
-                        if (Verifier.VerifyDivide(tempPolynomial.Terms[i], tempPolynomial.Terms[i - 1]))
+                        if (Verifier.VerifyDivide(Terms[i], Terms[i - 1]))
                         {
+                            
                             int j = i;
-                            newTerms.Add(Divider.Divide(tempPolynomial.Terms[i], tempPolynomial.Terms[i - 1])); //TODO: Change tempPolynomial.Terms[0] to a more friendly name
-                            tempPolynomial.Terms[i].HasBeenOperated = true;
-                            tempPolynomial.Terms[i - 1].HasBeenOperated = true;
+                            newTerms.Add(Divider.Divide(Terms[i], Terms[i - 1]));
+                            Terms[i].HasBeenOperated = true;
+                            Terms[i - 1].HasBeenOperated = true;
                             try
                             {
-                                while (tempPolynomial.Terms[j + 1].TermOperation == 3 || tempPolynomial.Terms[j + 1].TermOperation == 4)
+                                while (Terms[j + 1].TermOperation == 3 || Terms[j + 1].TermOperation == 4)
                                 {
-                                    if (tempPolynomial.Terms[j + 1].TermOperation == 3)
+                                    if (Terms[j + 1].TermOperation == 3)
                                     {
-                                        newTerms[0] = Multiplier.Multiply(tempPolynomial.Terms[j + 1], newTerms[0]);
-                                        tempPolynomial.Terms[j + 1].HasBeenOperated = true;
+                                        newTerms[0] = Multiplier.Multiply(Terms[j + 1], newTerms[0]);
+                                        Terms[j + 1].HasBeenOperated = true;
                                     }
 
-                                    if (tempPolynomial.Terms[j + 1].TermOperation == 4)
+                                    if (Terms[j + 1].TermOperation == 4)
                                     {
-                                        newTerms[0] = Divider.Divide(tempPolynomial.Terms[j + 1], newTerms[0]);
-                                        tempPolynomial.Terms[j + 1].HasBeenOperated = true;
+                                        newTerms[0] = Divider.Divide(Terms[j + 1], newTerms[0]);
+                                        Terms[j + 1].HasBeenOperated = true;
                                     }
 
                                     j++;
@@ -124,28 +127,28 @@ namespace ComputerAlgebraSystem.DoingStuff
                         }
                     }
 
-                    if (tempPolynomial.Terms[i].TermOperation == 3)
+                    if (Terms[i].TermOperation == 3)
                     {
-                        if (Verifier.VerifyMultiply(tempPolynomial.Terms[i], tempPolynomial.Terms[i - 1]))
+                        if (Verifier.VerifyMultiply(Terms[i], Terms[i - 1]))
                         {
                             int j = i;
-                            newTerms.Add(Multiplier.Multiply(tempPolynomial.Terms[i], tempPolynomial.Terms[i - 1]));
-                            tempPolynomial.Terms[i].HasBeenOperated = true;
-                            tempPolynomial.Terms[i - 1].HasBeenOperated = true;
+                            newTerms.Add(Multiplier.Multiply(Terms[i], Terms[i - 1]));
+                            Terms[i].HasBeenOperated = true;
+                            Terms[i - 1].HasBeenOperated = true;
                             try
                             {
-                                while (tempPolynomial.Terms[j + 1].TermOperation == 3 || tempPolynomial.Terms[j + 1].TermOperation == 4)
+                                while (Terms[j + 1].TermOperation == 3 || Terms[j + 1].TermOperation == 4)
                                 {
-                                    if (tempPolynomial.Terms[j + 1].TermOperation == 3)
+                                    if (Terms[j + 1].TermOperation == 3)
                                     {
-                                        newTerms[0] = Multiplier.Multiply(tempPolynomial.Terms[j + 1], newTerms[0]);
-                                        tempPolynomial.Terms[j + 1].HasBeenOperated = true;
+                                        newTerms[0] = Multiplier.Multiply(Terms[j + 1], newTerms[0]);
+                                        Terms[j + 1].HasBeenOperated = true;
                                     }
 
-                                    if (tempPolynomial.Terms[j + 1].TermOperation == 4)
+                                    if (Terms[j + 1].TermOperation == 4)
                                     {
-                                        newTerms[0] = Divider.Divide(tempPolynomial.Terms[j + 1], newTerms[0]);
-                                        tempPolynomial.Terms[j + 1].HasBeenOperated = true;
+                                        newTerms[0] = Divider.Divide(Terms[j + 1], newTerms[0]);
+                                        Terms[j + 1].HasBeenOperated = true;
                                     }
 
                                     j++;
@@ -156,10 +159,9 @@ namespace ComputerAlgebraSystem.DoingStuff
                             break;
                         }
                     }
-
                 }
 
-                foreach (Term t in tempPolynomial.Terms)
+                foreach (Term t in Terms)
                 {
                     if (!t.HasBeenOperated)
                         newTerms.Add(t);
@@ -181,15 +183,16 @@ namespace ComputerAlgebraSystem.DoingStuff
             do
             {
                 tempPolynomial = endPolynomial;
+                var Terms = tempPolynomial.Terms;
 
                 var newTerms = new List<Term>();
 
-                for (int i = tempPolynomial.Terms.Count - 1; i > 0; i--)
+                for (int i = Terms.Count - 1; i > 0; i--)
                 {
-                    if (tempPolynomial.Terms[i].TermOperation == 1)
+                    if (Terms[i].TermOperation == 1)
                     {
-                        Term t = tempPolynomial.Terms[i];
-                        foreach (Term te in tempPolynomial.Terms)
+                        Term t = Terms[i];
+                        foreach (Term te in Terms)
                         {
                             if (!te.HasBeenOperated)
                             {
@@ -225,7 +228,7 @@ namespace ComputerAlgebraSystem.DoingStuff
                     }
                 }
 
-                foreach (Term t in tempPolynomial.Terms)
+                foreach (Term t in Terms)
                 {
                     if (!t.HasBeenOperated)
                         newTerms.Add(t);

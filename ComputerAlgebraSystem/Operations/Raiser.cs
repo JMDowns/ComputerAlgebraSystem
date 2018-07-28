@@ -25,7 +25,7 @@ namespace ComputerAlgebraSystem.Operations
         static public Polynomial Raise(Polynomial p, int power)
         {
             var recursivePolynomial = p;
-            for (int i = 0; i < power; i++)
+            for (int i = 1; i < power; i++)
             {
                 recursivePolynomial = Distributor.Distribute(recursivePolynomial, p);
             }

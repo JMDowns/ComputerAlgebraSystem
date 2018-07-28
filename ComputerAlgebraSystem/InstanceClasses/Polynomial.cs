@@ -48,6 +48,8 @@ namespace ComputerAlgebraSystem
             foreach(var term in Terms)
                 s += term.ReturnString();
             s += ")";
+            if (Power != 1)
+                s += "^" + Power + " ";
 
             return s;
         }

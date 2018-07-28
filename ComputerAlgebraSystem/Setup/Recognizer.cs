@@ -9,7 +9,7 @@ namespace ComputerAlgebraSystem.Setup
 {
     static class Recognizer
     {
-        static public Expression Recognize(string verifiedInput)
+        static public Expression Recognize(string verifiedInput) //TODO: MAKE A PARSER!
         {
             //var findsPolynomials = new Regex("\(");
             //var listOfPolynomials = new List<Polynomial>();
@@ -40,6 +40,7 @@ namespace ComputerAlgebraSystem.Setup
             Term aPlusSevenXSquared = new Term(new Variable(new List<char>() { 'x' }, new List<float>() { 2 }), 7, 1, 1);
             Term aTimesTwentyZCubed = new Term(new Variable(new List<char>() { 'z' }, new List<float>() { 3 }), 20, 3, 1);
             Term aPlusSevenXSquaredZCubed = new Term(new Variable(new List<char>() { 'x', 'z' }, new List<float>() { 2, 3 }), 7, 1, 1);
+            Term aPlusSeven = new Term(new Variable(new List<char>() { 'x' }, new List<float>() { 0 }), 7, 1, 1);
             alistOfTerms.Add(asevenYSquared);
             alistOfTerms.Add(amultipliedByTwentyXSquared);
             alistOfTerms.Add(adividedByTenXSquared);
@@ -47,9 +48,10 @@ namespace ComputerAlgebraSystem.Setup
             alistOfTerms.Add(aPlusSevenXSquared);
             alistOfTerms.Add(aTimesTwentyZCubed);
             alistOfTerms.Add(aPlusSevenXSquaredZCubed);
+            alistOfTerms.Add(aPlusSeven);
 
-            Polynomial original = new Polynomial(listOfTerms, 0, 1);
-            Polynomial copy = new Polynomial(alistOfTerms, 3, 1);
+            Polynomial original = new Polynomial(listOfTerms, 0, 2);
+            Polynomial copy = new Polynomial(alistOfTerms, 1, 1);
             var listOfPolynomials = new List<Polynomial>() { original, copy };
             Expression esevenYSquaredDividedByTenXSquaredMultipliedByTwentyXSquared = new Expression(listOfPolynomials);
             return esevenYSquaredDividedByTenXSquaredMultipliedByTwentyXSquared;

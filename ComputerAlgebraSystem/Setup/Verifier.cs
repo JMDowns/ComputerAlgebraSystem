@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComputerAlgebraSystem.Setup
 {
-    static class Verifier
+    static class Verifier //TODO: Actually make Verify Methods or Decide if they're not needed
     {
         //Make Sure to add in VerifiedAdd, VerifiedSubtract, and so on that check if operation is valid before performing it
         static public string Verify(string input)
