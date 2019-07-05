@@ -26,15 +26,56 @@ namespace ComputerAlgebraSystem
             VarPower = varPower;
         }
 
-        public void Print()
+        public Variable()
         {
+            VarPower = new Dictionary<char, float>() { { 'x', 0 } };
+        }
+
+        public string ReturnString()
+        {
+            var s = "";
             foreach(KeyValuePair<char, float> variable in VarPower)
             {
                 if (variable.Value != 0)
                 {
-                    Console.Write(variable.Key + "^" + variable.Value);
+                     s += variable.Key + "^" + variable.Value;
                 }
             }
+
+            return s;
+        }
+
+        public bool IsEqual(Variable v)
+        {
+            foreach(KeyValuePair<char, float> pair in v.VarPower)
+            {
+                if (pair.Value != 0)
+                {
+                    if (!VarPower.Contains(pair))
+                        return false;
+                }
+            }
+
+            foreach (KeyValuePair<char, float> pair in VarPower)
+            {
+                if (pair.Value != 0)
+                {
+                    if (!v.VarPower.Contains(pair))
+                        return false;
+                }
+            }
+
+            return true;
+        }
+
+        public int ReturnPower()
+        {
+            var power = 0;
+            foreach(int Value in VarPower.Values)
+            {
+                power += Value;
+            }
+            return power;
         }
     }
 }

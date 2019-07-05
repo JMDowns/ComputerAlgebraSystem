@@ -9,20 +9,23 @@ namespace ComputerAlgebraSystem
     public class Polynomial
     {
         public List<Term> Terms { get; private set; }
-        public int PolynomialOperationSwitch { get; private set; }
+        public int PolynomialOperation { get; private set; }
         public int Power { get; private set; }
+        public bool HasBeenOperated { get; set; }
 
-        public Polynomial(List<Term> terms, int polynomialOperationSwitch, int power)
+        public Polynomial(List<Term> terms, int polynomialOperation, int power, bool HasBeenOperated = false)
         {
             Terms = terms;
-            PolynomialOperationSwitch = polynomialOperationSwitch;
+            PolynomialOperation = polynomialOperation;
             Power = power;
         }
 
-        public void Print()
+        public string ReturnString()
         {
+            var s = "";
+
             string operation = "";
-            switch (PolynomialOperationSwitch)
+            switch (PolynomialOperation)
             {
                 case 1:
                     operation = "+";
@@ -41,10 +44,52 @@ namespace ComputerAlgebraSystem
 
             }
 
-            Console.Write(operation + "(");
+            s = operation + "(";
             foreach(var term in Terms)
-                term.Print();
-            Console.Write(")");
+                s += term.ReturnString();
+            s += ")";
+            if (Power != 1)
+                s += "^" + Power + " ";
+
+            return s;
+        }
+
+        public void NullOperation()
+        {
+            PolynomialOperation = 0;
+        }
+
+        public void NullToAdd()
+        {
+            if (PolynomialOperation == 0)
+                PolynomialOperation = 1;
+        }
+
+        public void SubToNegAdd()
+        {
+            if (PolynomialOperation == 2)
+            {
+                foreach (Term t in Terms)
+                    t.NegTerm();
+                PolynomialOperation = 1;
+            }
+        }
+
+        public int GreatestPower()
+        {
+            var maxPower = 0;
+            foreach(Term t in Terms)
+            {
+                if (t.ReturnPower() > maxPower)
+                    maxPower = t.ReturnPower();
+            }
+            return maxPower;
+        }
+
+        public void Sort()
+        {
+            Terms = Terms.OrderBy(x => x.ReturnPower()).ToList();
+            Terms.Reverse();
         }
     }
 }

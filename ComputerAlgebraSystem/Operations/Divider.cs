@@ -8,16 +8,16 @@ namespace ComputerAlgebraSystem.Operations
 {
     static class Divider
     {
-        static public Term Divide(Term term1, Term term2)
+        static public Term Divide(Term t2, Term t1)
         {
-            float dividedCoefficient = term1.Coefficient / term2.Coefficient;
-            var newVariables = new Dictionary<char, float>(term1.Var.VarPower);
-            var termOperationSwitch = 1;
+            float dividedCoefficient = t1.Coefficient / t2.Coefficient;
+            var newVariables = new Dictionary<char, float>(t1.Var.VarPower);
+            var termOperation = 1;
             var power = 1;
 
-            foreach (KeyValuePair<char, float> term2Vars in term2.Var.VarPower)
+            foreach (KeyValuePair<char, float> term2Vars in t2.Var.VarPower)
             {
-                if (term1.Var.VarPower.ContainsKey(term2Vars.Key))
+                if (t1.Var.VarPower.ContainsKey(term2Vars.Key))
                 {
                     newVariables[term2Vars.Key] -= term2Vars.Value;
                 }
@@ -27,7 +27,7 @@ namespace ComputerAlgebraSystem.Operations
                 }
             }
 
-            return new Term(new Variable(newVariables), dividedCoefficient, termOperationSwitch, power);
+            return new Term(new Variable(newVariables), dividedCoefficient, termOperation, power);
         }
     }
 }

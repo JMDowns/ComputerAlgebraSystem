@@ -1,9 +1,7 @@
 ﻿using ComputerAlgebraSystem.Operations;
+using ComputerAlgebraSystem.Setup;
+using ComputerAlgebraSystem.DoingStuff;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ComputerAlgebraSystem
 {
@@ -18,17 +16,13 @@ namespace ComputerAlgebraSystem
     {
         static void Main(string[] args)
         {
-            Overseer overseer = new Overseer();
-            overseer.Setup();
-            overseer.Expression.Print();
-            var mTerm = Multiplier.Multiply(overseer.Expression.PolynomialList[0].Terms[0], overseer.Expression.PolynomialList[0].Terms[1]);
-            var dTerm = Divider.Divide(overseer.Expression.PolynomialList[0].Terms[0], overseer.Expression.PolynomialList[0].Terms[1]);
-            var rPolynomial = Multiplier.Multiply(overseer.Expression.PolynomialList[0], overseer.Expression.PolynomialList[0]);
-            var aPolynomial = Adder.Add(overseer.Expression.PolynomialList[0], overseer.Expression.PolynomialList[0]);
-            mTerm.Print();
-            dTerm.Print();
-            rPolynomial.Print();
-            aPolynomial.Print();
+            Expression printedExpression;
+            Overseer ov = new Overseer();
+            Operator op = new Operator();
+            ov.Setup();
+            Console.WriteLine(ov.Expression.ReturnString());
+            printedExpression = op.Analyze_And_Simplify(ov.Expression);
+            Console.WriteLine(printedExpression.ReturnString());
         }
     }
 }

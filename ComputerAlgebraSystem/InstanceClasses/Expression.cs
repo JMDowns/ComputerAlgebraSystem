@@ -8,19 +8,24 @@ namespace ComputerAlgebraSystem
 {
     public class Expression
     {
-        public List<Polynomial> PolynomialList { get; private set; }
+        public List<Polynomial> Polynomials { get; private set; }
 
-        public Expression(List<Polynomial> polynomialList)
+        public Expression(List<Polynomial> polynomials)
         {
-            PolynomialList = polynomialList;
+            Polynomials = polynomials;
         }
 
-        public void Print()
+        public Expression()
         {
-            Console.Write("(");
-            foreach (var polynomial in PolynomialList)
-                polynomial.Print();
-            Console.WriteLine(")");
+            Polynomials.Add(new Polynomial(new List<Term>() { new Term() }, 1, 1));
+        }
+
+        public string ReturnString()
+        {
+            var s = "";
+            foreach (var polynomial in Polynomials)
+                s += polynomial.ReturnString();
+            return s;
         }
     }
 }
